@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rumi's Demon Hunt - Neon Streets</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="ui-overlay">
+            <div class="top-bar">
+                <div class="player-stats">
+                    <div class="health-bar">
+                        <span class="label">HP:</span>
+                        <div class="bar">
+                            <div class="fill" id="health-fill"></div>
+                        </div>
+                        <span id="health-text">100/100</span>
+                    </div>
+                    <div class="stamina-bar">
+                        <span class="label">STA:</span>
+                        <div class="bar">
+                            <div class="fill" id="stamina-fill"></div>
+                        </div>
+                        <span id="stamina-text">100/100</span>
+                    </div>
+                </div>
+                <div class="game-info">
+                    <div class="level-info">
+                        <span>Level: <span id="current-level">1 - Neon Streets</span></span>
+                        <span>Wave: <span id="current-wave">1/3</span></span>
+                        <span>Score: <span id="score">0</span></span>
+                    </div>
+                    <div class="weapon-info">
+                        <span>Weapon: <span id="current-weapon">Light Blade Mic</span></span>
+                        <span>Damage: <span id="weapon-damage">10</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="controls-info">
+                <p>WASD: Move | Mouse: Aim | Space: Light Attack | Shift+Space: Heavy Attack | Shift: Dash | Q: AOE Pulse</p>
+            </div>
+        </div>
+        <canvas id="gameCanvas" width="1000" height="600"></canvas>
+        <div class="game-over" id="gameOver" style="display: none;">
+            <div class="modal-content">
+                <h2>Game Over</h2>
+                <p>Rumi fought bravely but the demons overwhelmed her...</p>
+                <p>Final Score: <span id="final-score">0</span></p>
+                <button onclick="restartGame()">Try Again</button>
+            </div>
+        </div>
+        <div class="level-complete" id="levelComplete" style="display: none;">
+            <div class="modal-content">
+                <h2>Neon Streets Cleared!</h2>
+                <p>Rumi has defeated the Amp Fiend!</p>
+                <p>Score: <span id="level-score">0</span></p>
+                <p class="next-level-text">Next Gig Coming Soon...</p>
+                <button onclick="restartGame()">Play Again</button>
+            </div>
+        </div>
+        <div class="intro-cutscene" id="introCutscene">
+            <div class="cutscene-content">
+                <h1>Rumi's Demon Hunt</h1>
+                <h2>Level 1: Neon Streets</h2>
+                <p>Demons have invaded the neon-lit streets of Seoul...</p>
+                <p>As K-pop star and demon hunter Rumi, clear the streets!</p>
+                <button onclick="startGame()">Start Mission</button>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
