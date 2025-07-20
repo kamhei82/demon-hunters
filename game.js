@@ -25,29 +25,43 @@ class Game {
     }
     
     setupEventListeners() {
-        window.addEventListener('keydown', (e) => {
+        this.keyDownHandler = (e) => {
             this.keys[e.code] = true;
             if (e.code === 'Space') e.preventDefault();
-        });
-        
-        window.addEventListener('keyup', (e) => {
+        };
+
+        this.keyUpHandler = (e) => {
             this.keys[e.code] = false;
-        });
-        
-        this.canvas.addEventListener('mousemove', (e) => {
+        };
+
+        this.mouseMoveHandler = (e) => {
             const rect = this.canvas.getBoundingClientRect();
             this.mouse.x = e.clientX - rect.left;
             this.mouse.y = e.clientY - rect.top;
-        });
-        
-        this.canvas.addEventListener('mousedown', (e) => {
+        };
+
+        this.mouseDownHandler = (e) => {
             this.mouse.clicked = true;
             e.preventDefault();
-        });
-        
-        this.canvas.addEventListener('mouseup', (e) => {
+        };
+
+        this.mouseUpHandler = () => {
             this.mouse.clicked = false;
-        });
+        };
+
+        window.addEventListener('keydown', this.keyDownHandler);
+        window.addEventListener('keyup', this.keyUpHandler);
+        this.canvas.addEventListener('mousemove', this.mouseMoveHandler);
+        this.canvas.addEventListener('mousedown', this.mouseDownHandler);
+        this.canvas.addEventListener('mouseup', this.mouseUpHandler);
+    }
+
+    removeEventListeners() {
+        window.removeEventListener('keydown', this.keyDownHandler);
+        window.removeEventListener('keyup', this.keyUpHandler);
+        this.canvas.removeEventListener('mousemove', this.mouseMoveHandler);
+        this.canvas.removeEventListener('mousedown', this.mouseDownHandler);
+        this.canvas.removeEventListener('mouseup', this.mouseUpHandler);
     }
     
     initializeGame() {
@@ -870,6 +884,9 @@ function startGame() {
 function restartGame() {
     document.getElementById('gameOver').style.display = 'none';
     document.getElementById('levelComplete').style.display = 'none';
+    if (game) {
+        game.removeEventListeners();
+    }
     game = new Game();
     game.startGame();
 }
